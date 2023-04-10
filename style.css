@@ -32,7 +32,7 @@ body {
     background-color: rgb(233, 55, 55);
 }
 
-.calculator-grid > .operation {
+.calculator-grid > .operator {
     
     background-color: #283c5a;
 }
@@ -45,7 +45,7 @@ body {
     grid-column: span 2;
 }
 
-.clear:hover, .operation:hover, .operand:hover {
+.clear:hover, .operator:hover, .operand:hover {
     background-color: rgb(56, 56, 56);
 }
 
