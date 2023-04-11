@@ -22,9 +22,9 @@ class Calculator {
         this.currentResult = '';
         this.operator = '';
     }
-    //clears the current element
+    //clears the current element -->doesnt work
     clear(){
-
+        this.currentResult = this.currentResult.toString().slice(0, -1);
     }
     //Add a number to the screen once clicked
     appendNumber(operand){
@@ -71,7 +71,12 @@ class Calculator {
     //updates values inside output
     updateDisplay(){
         this.currentResultTextElement.innerText = this.currentResult;
-        this.previousResultTextElement.innerText = this.previousResult;
+        if (this.operator != null) {
+            this.previousResultTextElement.innerText = `${this.previousResult} ${this.operator}`
+        } else {
+            this.previousResultTextElement.innerText = '';
+        }
+        
     }
 }
 //Create a calculator object
@@ -97,10 +102,22 @@ equalsButton.addEventListener('click', button => {
     calculator.updateDisplay();
 })
 
+allClearButton.addEventListener('click', button => {
+    calculator.allClear();
+    calculator.updateDisplay();
+})
+
+clearButton.addEventListener('click', button => {
+    calculator.clear();
+    calculator.updateDisplay();
+})
+
 
 
 
 /* Possible Improvements:
+-Fix clear
+-Add comma delimiter
 -Allow keyboard input
 -Add more functions
 -Allow a user to click the . button once 
