@@ -32,6 +32,10 @@ class Calculator {
     }
     //Add an operator to the screen 
     chooseOperator(operator){
+        if (this.currentResult == '') return //disallow user to enter in an operator if nothing to operate on
+        if (this.previousResult !=='') {
+            this.compute();
+        }
         this.operator = operator;
         this.previousResult = this.currentResult;
         this.currentResult = '';
@@ -39,6 +43,29 @@ class Calculator {
     }
     //Take values selected + compute a result
     compute(){
+        let computation;
+        const prev = parseFloat(this.previousResult); //convert to int
+        const current = parseFloat(this.currentResult);
+        if (isNaN(prev) || isNaN(current)) return;
+        switch(this.operator) {
+            case '+':
+                computation = prev + current;
+                break;
+            case '-':
+                computation = prev - current;
+                break;
+            case 'x':
+                computation = prev * current;
+                break;
+            case '÷':
+                computation = prev / current;
+                break;
+            default:
+                return
+        }
+        this.currentResult = computation;
+        this.operator = undefined;
+        this.previousResult = '';
 
     }
     //updates values inside output
@@ -65,10 +92,16 @@ operatorButton.forEach(button => {
     })
 })
 
+equalsButton.addEventListener('click', button => {
+    calculator.compute();
+    calculator.updateDisplay();
+})
+
 
 
 
 /* Possible Improvements:
+-Allow keyboard input
 -Add more functions
 -Allow a user to click the . button once 
 */
